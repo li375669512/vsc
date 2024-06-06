@@ -51,15 +51,20 @@ Gitflow 工作流是目前非常成熟的一个方案，它定义了一个围绕
 和功能分支工作流相比，Gitflow工作流没有增加任何新的概念或命令，它给不同的分支指定了特定的角色，定义它们应该如何、什么时候交互。除了功能分支之外，还为准备发布、维护发布、记录发布分别使用了单独的分支。
 
 **Gitflow 常见分支：**
-• 开发主分支：master 分支
+
+* 开发主分支：master 分支
 master 分支的代码是可以直接部署到生成环境的，为了保持稳定性一般不会直接在这个分支上修改代码，都是通过其他分支合并过来的。
-• 开发主分支：develop分支
+
+* 开发主分支：develop分支
 develop 分支是主开发分支，包含所有要发布到下一个release的代码，主要是由feature分支合并过来的。
-• 临时分支：feature 分支
+
+* 临时分支：feature 分支
 feature 分支主要是用来开发一个新特性，一旦开发完成会合入 develop 分支，feature 分支也随即删除掉。
-• 临时分支：release 分支
+
+* 临时分支：release 分支
 当需要一个发布一个新release版本时，会基于develop分支创建一个release分支，经过测试人员充分测试后再合入 master 分支和 develop 分支。
-• 临时分支：hotfix 分支
+
+* 临时分支：hotfix 分支
 当在生成环境发现新的Bug时候，如果需要紧急修复，会创建一个hotfix分支， 充分测试后合入master和develop分支，随后删除该分支。
 
 **各分支如何配合工作？**
@@ -87,11 +92,13 @@ hotfix分支基于master分支创建，开发完后需要同时回合到master�
 ![hotfix分支](/images/hotfix分支.png)
 
 **分支命名规范**
+
 团队内部可以约定每个分支的命名样式，这里举个例子，大家可以参考：
-• feature分支：以feature_开头，如 feature_order
-• release分支：以release_开头，如 release_v1.0
-• hotfix分支：以hotfix_开头，如hotfix_20210117
-• tag标记：如果是release分支合并，则以release_开头，如果是hotfix分支合并，则以hotfix_开头。
+
+* feature分支：以feature_开头，如 feature_order
+* release分支：以release_开头，如 release_v1.0
+* hotfix分支：以hotfix_开头，如hotfix_20210117
+* tag标记：如果是release分支合并，则以release_开头，如果是hotfix分支合并，则以hotfix_开头。
 
 ## Forking 工作流
 ---
