@@ -8,11 +8,11 @@
 ---
 集中式工作流这种工作方式对于使用过SVN的同学想必会非常的熟悉，让我们思考下在 SVN下的协作体验，不同的开发同学需要依次将本地的修改提交到服务器，如果有冲突就先解决本地的冲突再提交，这个过程中远端的服务器就像是一个集中管理者，管理着所有人的代码提交，所以 SVN的开发协作流程就是典型的集中式工作流。
 
-![SVN集中式](/images/SVN集中式.png)
+![SVN集中式](/images/git/SVN集中式.png)
 
 如果切换到 Git 来维护代码仓，但是开发人员又对 Git 的分支模式不熟悉，能不能用 Git 实现类似的集中式工作流呢？答案是当然可以。
 
-![Git仿集中式](/images/Git仿集中式.png)
+![Git仿集中式](/images/git/Git仿集中式.png)
 
 每个开发人员将远程仓库的代码 clone 下来变成了属于自己的本地仓库，提交代码时先提交至本地仓库，然后再推送到远程仓库。
 
@@ -20,7 +20,7 @@
 
 从提交记录来看，集中式工作流通常是一条直线往前走，如下图：
 
-![集中式代码提交流程](/images/集中式代码提交流程.png)
+![集中式代码提交流程](/images/git/集中式代码提交流程.png)
 
 > 小结：这种模式不推荐大家使用，因为完全没有发挥出 Git 的作用，类似于用倚天剑屠龙刀来切菜，太浪费了。
 
@@ -31,13 +31,13 @@
 
 为了便于大家并发开展工作，通常会基于 master 主干分支拉取几个特性分支，每个开发人员关注于自己的分支，需要提交代码时直接提交到本地库的特性分支，在合入到主干分支前通常会拉取最新的代码，如果有冲突先在本地解决好冲突，解决完提交 MR 申请将特性分支合入主干分支。
 
-![功能分支工作流1](/images/功能分支工作流1.png)
+![功能分支工作流1](/images/git/功能分支工作流1.png)
 
 在功能分支工作流下，不会直接将代码合入到主干分支（master），通常是通过其他分支提交 MR（Merge Request），这使得集成一些自动化操作变得简单可行了。
 
 提交 MR 之后团队成员开始围观你写的代码，可以提交检视意见（code review），还可以进行投票（vote），团队 committer 据此合入或者驳回你的 MR。
 
-![功能分支工作流2](/images/功能分支工作流2.png)
+![功能分支工作流2](/images/git/功能分支工作流2.png)
 
 新功能大量合并到 master 分支后容易造成 master 分支质量不稳定，不稳定会有什么问题？比如线上突然有个 bug 要解决，可能只需要修改一行代码就能解决，但是 master 分支已经合入了大量新特性，测试人员还没来得及测试，那最稳妥的办法就是将代码回退到上一次发版本的时间节点，基于这个节点再修改一行代码，是不是太麻烦了？
 
@@ -73,23 +73,23 @@ feature 分支主要是用来开发一个新特性，一旦开发完成会合入
 devlop分支 是基于 master分支创建的，与 master 分支一样都是主分支，不会被删除。
 develop 从 master 拉出来之后会独立发展，不会与 master 直接产生联系。
 
-![master_develop分支](/images/master_develop分支.png)
+![master_develop分支](/images/git/master_develop分支.png)
 
 （2）feature 分支
 通常一个独立的特性都会基于 develop 拉出一个 feature 分支，feature 分支之间没有任何交互，互不影响。feature 分支一旦开发完成后会立马合入 develop 分支（采用 merge request 或者 pull request），feature 分支的生命周期也随之结束。
 
 
-![feature分支](/images/feature分支.png)
+![feature分支](/images/git/feature分支.png)
 
 （3）release 分支
 通常一个迭代上线会拉一个release 分支，开发人员开发完毕所有的代码都已合入 develop 分支，这时候会基于 develop 分支拉出一个 release 分支，测试人员基于该分支进行测试。
 
-![release分支](/images/release分支.png)
+![release分支](/images/git/release分支.png)
 
 （4）hotfix 分支
 hotfix分支基于master分支创建，开发完后需要同时回合到master和develop分支，同时在master上打一个tag。
 
-![hotfix分支](/images/hotfix分支.png)
+![hotfix分支](/images/git/hotfix分支.png)
 
 **分支命名规范**
 
@@ -111,12 +111,12 @@ Watch 是关注的意思，一旦你点击了之后该项目有任何改动都�
 Star 类似于点赞的意思，多给开源项目点个赞，鼓励一下作者；
 Fork 本意是分叉，实际上是克隆的意思，点了之后会将该项目拷贝一份到自己的 github 远程仓库中。
 
-![Forking工作流1](/images/Forking工作流1.png)
+![Forking工作流1](/images/git/Forking工作流1.png)
 
 **fork 示例**
 在本地执行 git clone 命令将代码克隆到本地，一顿修改操作后提交代码并 push到个人远程仓库中，然后在界面上发起 pull request，项目的原作者会看到你提交的 PR，根据提交的质量作者可以选择接受或拒绝。
 
-![fork示例](/images/fork示例.png)
+![fork示例](/images/git/fork示例.png)
 
 Forking 工作流非常适合于类似 Github 这种开源项目，任何一个开发者都可以通过fork + pull request 向项目中贡献代码。
 
